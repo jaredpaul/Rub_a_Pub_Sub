@@ -14,6 +14,13 @@ def send_css(path):
 def result():
     return render_template("index.html")
 
+@app.route('/', methods=['GET', 'POST'])
+def getUserInput():
+    text = request.form['box']
+    print(text)
+    return render_template("index.html", output=text)
+    # return text
+
 
 
 if __name__ == '__main__':
