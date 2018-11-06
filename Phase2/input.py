@@ -12,15 +12,15 @@ def send_css(path):
     return send_from_directory('css', path)
 
 
-@app.route('/input')
+@app.route('/subscribe')
 def result():
-    return render_template("input.html")
+    return render_template("subscribe.html")
 
-@app.route('/output')
+@app.route('/publish')
 def result2():
-    return render_template("output.html")
+    return render_template("publish.html")
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/subscribe', methods=['GET', 'POST'])
 def getUserInput():
     # Get user input from front end
     text = request.form['box']
@@ -37,7 +37,7 @@ def getUserInput():
     os.system("sudo docker build -t test-file .")
     client = docker.from_env()
     image = client.containers.run("test-file")
-    return render_template("output.html", output=str(image))
+    return render_template("publish.html", output=str(image))
 
 
 if __name__ == '__main__':
