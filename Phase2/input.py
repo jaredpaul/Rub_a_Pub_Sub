@@ -19,25 +19,15 @@ def result():
 @app.route('/publish')
 def result2():
     return render_template("publish.html")
+def dispInput(testStr):
+    return render_template("publish.html", output=testStr)
 
 @app.route('/subscribe', methods=['GET', 'POST'])
 def getUserInput():
     # Get user input from front end
     text = request.form['box']
-    print(text)
-
-    # Make a python file that will contain user input
-    # File is overwritten when user submits more than one input
-    # counter = 1
-    fileName = "userFile.py"
-     # + str(counter)
-    outF = open(fileName, "w")
-    outF.writelines(text)
-    outF.close()
-    os.system("sudo docker build -t test-file .")
-    client = docker.from_env()
-    image = client.containers.run("test-file")
-    return render_template("publish.html", output=str(image))
+    dispInput(text)
+    return render_template("subscribe.html")
 
 
 if __name__ == '__main__':

@@ -30,10 +30,22 @@ def getUserInput():
     outF = open(fileName, "w")
     outF.writelines(text)
     outF.close()
-    os.system("sudo docker build -t test-file .")
-    client = docker.from_env()
-    image = client.containers.run("test-file")
-    return render_template("index.html", output=str(image))
+    os.system("docker build -t test-file .")
+
+    os.system("docker run test-file > output.txt")
+
+    x = ""
+    with open("output.txt") as f:
+        for line in f:
+            x += str(line)
+
+
+
+
+
+    # client = docker.from_env()
+    # image = client.containers.run("test-file")
+    return render_template("index.html", output=x)
 
 
 if __name__ == '__main__':
