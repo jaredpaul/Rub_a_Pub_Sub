@@ -4,52 +4,69 @@
 <head>
   <meta charset="utf-8">
   <title>Phase 1 Front End</title>
-  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/styles.css" media="screen">
+  <script src="https://cdn.alloyui.com/3.0.1/aui/aui-min.js"></script>
+  <script src="/js/code.js"></script>
+  <!-- <link href="https://cdn.alloyui.com/3.0.1/aui-css/css/bootstrap.min.css" rel="stylesheet"></link> -->
 </head>
 
 <body>
 
-<h1>Run Your Code Below!</h1>
+  <h1>Run Your Code Below!</h1>
+
+
+  <div id="inline-div">
 
 
 
-  <h2>Input:</h2>
-
-
-
-  <!-- <form method="POST" id=inputForm>
-    <input name="text">
-    <input type="submit">
-  </form> -->
-
-  <!-- <form class="form-group purple-border" method="POST" name="inputForm">
-    <label for="ControlTextAreaInput"></label>
-    <textarea class="form-control" name='box' id="input" rows="30" cols="150" form="inputForm"></textarea>
-    <button id="runButton" type=submit>Run</button>
+    <!-- <div class="left-div">
+      <h2 align="center">Input</h2>
+      <div id="myEditor"></div>
+        <script>
+          test();
+        </script>
+      </div>
   </form> -->
 
 
-  <form method="POST">
-    <textarea class='form-control' name="box" rows='30' cols=150></textarea>
-    <button id="runButton" type=submit>Run</button>
-  </form>
+    <div class="left-div">
+      <h2 align="center">Input</h2>
+      <form method="POST">
+        <textarea class='form-control' name="box" rows='27' cols=98></textarea>
+        <button id="runButton" type=submit align="center">Run</button>
+      </form>
+    </div>
 
 
 
-  <h2>Output:</h2>
 
-  <div class="form-group green-border-focus">
-    <label for="ControlTextAreaOutput"></label>
-    <textarea class="form-control" name="output" rows="30" cols="150">{{output}}</textarea>
+
+    <div class="right-div">
+      <h2 align="center">Output</h2>
+      <label for="ControlTextAreaOutput"></label>
+      <textarea name="output" rows="27" cols="98" >{{output}}</textarea>
+    </div>
+
+    <div style= "clear: both;"></div>
+
   </div>
 
-  <!-- <form method="GET">
-    <textarea class='form-control' name="output" rows='30' cols=150></textarea>
-    <button id="runButton" type=submit>Run</button>
-  </form> -->
 
+
+
+<!--
+  <h2>Input:</h2>
+  <h2>Output:</h2>
+ -->
+
+
+  <!-- <h2>Output:</h2> -->
+
+  <!-- <label for="ControlTextAreaOutput"></label>
+  <textarea name="output" rows="25" cols="98" >{{output}}</textarea> -->
 
   <script src="/js/code.js"></script>
+
 </body>
 
 </html>

@@ -1,5 +1,13 @@
-function runb() {
-  var userInput = document.getElementById("input").value;
-  document.getElementById("output").value = userInput;
-  console.log(userInput);
+function test() {
+  YUI().use(
+    'aui-ace-editor',
+    function(Y) {
+      new Y.AceEditor(
+        {
+          boundingBox: '#myEditor',
+          mode: 'python'
+        }
+      ).render();
+    }
+  );
 }
