@@ -35,7 +35,7 @@ def getUserInput():
     os.system("docker run test-file > output.txt")
 
     x = ""
-    with open("output.txt") as f:
+    with open("output.txt", "r") as f:
         for line in f:
             x += str(line)
 
