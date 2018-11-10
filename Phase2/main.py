@@ -10,11 +10,6 @@ def send_js(path):
 @app.route('/css/<path:path>')
 def send_css(path):
     return send_from_directory('css', path)
-
-
-@app.route('/')
-def result():
-    return render_template("pubsub.html", data=[{'name':'Earthlings'}, {'name':'Saiyans'}, {'name':'Namekians'}, {'name': 'Villains'}])
 #
 # @app.route('/publish')
 # def result2():
@@ -26,8 +21,10 @@ def result():
 def getUserInput():
     # Get user input from front end
     text = request.form.get('fighterz')
-    # dispInput(text)
-    print(text)
+    subscribe(text)
+    return render_template("pubsub.html", output=str(text))
+
+def subscribe(text):
     return render_template("pubsub.html", output=str(text))
 
 

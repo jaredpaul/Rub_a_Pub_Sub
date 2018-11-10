@@ -12,43 +12,30 @@
   <div id="inline-div">
 
 
-
-    <!-- <div class="left-div">
-      <h2 align="center">Input</h2>
-      <div id="myEditor"></div>
-        <script>
-          test();
-        </script>
-      </div>
-  </form> -->
-
-
     <div class="left-div">
-      <h2 align="center">Subscriber</h2>
+      <h2 align="center">Subscriber Request</h2>
       <form method="POST">
-	<select name="fighterz">
+	<select name="fighterz" align="center">
         <option value="Namekians">Namekians</option>
         <option value="Saiyans">Saiyans</option>
         <option value="Earthlings">Earthlinngs</option>
         <option value="Villains">Villains</option>
         </select>
-        <button id="runButton" type=submit align="center">Run</button>
+        <button id="runButton" type=submit align="center">Subscribe</button>
       </form>
+      <h2 align="cener">Information For Subscriber</h2>
+      <textarea name="published info for subscriber" rows="10" cols="100" ></textarea>
     </div>
-
-
-
 
 
     <div class="right-div">
-      <h2 align="center">Publisher</h2>
+      <h2 align="center">Published Information</h2>
+      <form method="POST">
       <label for="ControlTextAreaOutput"></label>
-      <textarea name="output" rows="27" cols="98" >{{output}}</textarea>
+      <textarea name="output" rows="7" cols="20" >{{output}}</textarea>
+      <button id="publishButton" type=submit align="center">Publish</button>
+      </form>
     </div>
-
-    <div style= "clear: both;"></div>
-
-  </div>
 
 </body>
 
