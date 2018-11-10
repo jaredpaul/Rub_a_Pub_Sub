@@ -1,42 +1,49 @@
 <head>
-  <meta charset="utf-8">
-  <title>Phase 2 Input</title>
-  <link rel="stylesheet" href="/css/styles.css">
-</head>
+
+  <head>
+    <meta charset="utf-8">
+    <title>Phase 2 Input</title>
+    <link rel="stylesheet" href="/css/styles.css">
+  </head>
 
 <body>
 
-  <h1>Subscribe! Publish! You Decide!</h1>
+  <h1>Dragon Ball Z Information</h1>
 
 
   <div id="inline-div">
 
 
     <div class="left-div">
-      <h2 align="center">Subscriber Request</h2>
+      <h2 align="center">Subscriber</h2>
       <form method="POST">
-	<select name="fighterz" align="center">
-        <option value="Namekians">Namekians</option>
-        <option value="Saiyans">Saiyans</option>
-        <option value="Earthlings">Earthlinngs</option>
-        <option value="Villains">Villains</option>
-        </select>
-        <button id="runButton" type=submit align="center">Subscribe</button>
+
+          <input type="checkbox" name="saiyan" value="saiyan" autocomplete="off"> Saiyan<br>
+          <input type="checkbox" name="namekian" value="namekian" autocomplete="off"> Namekian<br>
+          <input type="checkbox" name="villian" value="villian" autocomplete="off"> Villian<br>
+          <input type="checkbox" name="earthling" value="earthling" autocomplete="off"> Earthling
+          <!-- <textarea class='form-control' name="box" rows='27' cols=98></textarea>-->
+          <button id="runButton" type=submit align="center">Subscribe</button>
+
       </form>
-      <h2 align="cener">Information For Subscriber</h2>
-      <textarea name="published info for subscriber" rows="10" cols="100" ></textarea>
     </div>
+
+
+
 
 
     <div class="right-div">
-      <h2 align="center">Published Information</h2>
-      <form method="POST">
+      <h2 align="center">Publisher</h2>
       <label for="ControlTextAreaOutput"></label>
-      <textarea name="output" rows="7" cols="20" >{{output}}</textarea>
-      <button id="publishButton" type=submit align="center">Publish</button>
-      </form>
+      <textarea name="output" rows="27" cols="98">{{output}}</textarea>
     </div>
 
+    <div style="clear: both;"></div>
+
+  </div>
+
 </body>
+
+
 
 </html>
