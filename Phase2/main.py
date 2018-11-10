@@ -14,7 +14,7 @@ def send_css(path):
 
 @app.route('/')
 def result():
-    return render_template("subscribe.html")
+    return render_template("pubsub.html", data=[{'name':'Earthlings'}, {'name':'Saiyans'}, {'name':'Namekians'}, {'name': 'Villains'}])
 #
 # @app.route('/publish')
 # def result2():
@@ -25,9 +25,10 @@ def result():
 @app.route('/', methods=['GET', 'POST'])
 def getUserInput():
     # Get user input from front end
-    text = request.form['box']
+    text = request.form.get('fighterz')
     # dispInput(text)
-    return render_template("subscribe.html", output=text)
+    print(text)
+    return render_template("pubsub.html", output=str(text))
 
 
 if __name__ == '__main__':
