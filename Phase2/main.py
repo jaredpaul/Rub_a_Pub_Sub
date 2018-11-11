@@ -5,6 +5,16 @@ app = Flask(__name__, static_url_path='')
 
 map = {'info': []}
 
+subs = {}
+
+pubs = {"Saiyans": False,
+        "Namekians": False,
+        "Earthlings": False,
+        "the Majin race": False,
+        "the Ginyu Force": False,
+        "the Z-Fighters": False
+        }
+
 
 
 @app.route('/js/<path:path>')
@@ -31,16 +41,57 @@ def getUserInput():
     for key in request.form:
         print(key)
         if key == "subName":
-            str = ""
-            text = request.form.get("subSelect")
+            already = "\n"
+            str = "\n"
+            topic = request.form.get("subSelect")
+            usrName = request.form.get("subName")
+            if usrName in subs:
+                t = subs[usrName]
+                if topic not in t:
+                    t.append(topic)
+                    subs[usrName] = t
+                else:
+                    s = "Sorry! Cannot subscribe to the same thing twice!\n"
+                    tempp = map['info']
+                    tempp.append(s)
+                    map['info'] = tempp
+                    for prev in tempp:
+                        str += prev + '\n'
+                    return render_template("pubsub.html", output=str)
+            else:
+                print(pubs)
+                for j in pubs:
+                    if pubs[j]:
+                        already += usrName + " has received information that has already been published regarding " + topic + "\n"
+                subs[usrName] = [topic]
+
+            notifyText = usrName + " has subscribed to information regarding " + topic + "!\n"
+            notifyText += "\n" + already
             tempp = map['info']
-            tempp.append(text)
+            tempp.append(notifyText)
             map['info'] = tempp
             for prev in tempp:
                 str += prev + '\n'
             return render_template("pubsub.html", output=str)
 
-        # if key == "":
+        if key == "pubInfo":
+            str = ""
+            topic = request.form.get("pubSelect")
+            wasSub = ""
+            pubs[topic] = True
+            for u in subs:
+                t = subs[u]
+                for info in t:
+                    if topic == info:
+                        wasSub += u + " has received new information regarding " + topic + "!\n"
+            tempp = map['info']
+            if wasSub != "":
+                tempp.append(wasSub)
+                map['info'] = tempp
+            for prev in tempp:
+                str += prev + '\n'
+
+            print(pubs)
 
     return render_template("pubsub.html", output=str)
 
