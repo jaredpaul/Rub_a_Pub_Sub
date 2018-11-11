@@ -189,7 +189,11 @@ textarea {
   margin-top: 25px
 }
 
-#pubElements {
+#pubSide {
+  padding-top: 20%;
+}
+
+/* #pubElements {
   position: absolute;
   vertical-align: middle;
-}
+} */
