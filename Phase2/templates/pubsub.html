@@ -1,46 +1,80 @@
-<head>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
 
-  <head>
-    <meta charset="utf-8">
-    <title>Phase 2 Input</title>
-    <link rel="stylesheet" href="/css/styles.css">
-  </head>
+<head>
+  <meta charset="utf-8">
+  <title>Phase 2 Input</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
 
 <body>
 
-  <h1>Dragon Ball Z Information</h1>
+  <div id="top">
 
-
-  <div id="inline-div">
-
-
-    <div class="left-div">
-      <h2 align="center">Subscriber</h2>
-      <form method="POST">
-
-          <input type="checkbox" name="saiyan" value="saiyan" autocomplete="off"> Saiyan<br>
-          <input type="checkbox" name="namekian" value="namekian" autocomplete="off"> Namekian<br>
-          <input type="checkbox" name="villian" value="villian" autocomplete="off"> Villian<br>
-          <input type="checkbox" name="earthling" value="earthling" autocomplete="off"> Earthling
-          <!-- <textarea class='form-control' name="box" rows='27' cols=98></textarea>-->
-          <button id="runButton" type=submit align="center">Subscribe</button>
-
-      </form>
+    <div class="split left">
+      <div class="centered">
+        <h1 id='subTitle'>Subscribers</h1>
+        <h3 id='directionsSub'>Enter your username, and subscribe to any topic!</h3>
+        <form method="POST">
+          <input type="text" id="Stopic" name="subName" placeholder="Enter your username!">
+          <select name="subSelect">
+            <option value="Saiyans">Saiyans</option>
+            <option value="Namekians">Namekians</option>
+            <option value="Earthling">Earthlings</option>
+            <option value="Majin">Majin</option>
+            <option value="the Ginyu Force">Ginyu Force</option>
+            <option value="the Z-Fighters">Z Fighters</option>
+          </select>
+          <div>
+            <button id="subButton" type=submit align="center">Subscribe</button>
+          </div>
+        </form>
+      </div>
     </div>
 
 
 
-
-
-    <div class="right-div">
-      <h2 align="center">Publisher</h2>
-      <label for="ControlTextAreaOutput"></label>
-      <textarea name="output" rows="27" cols="98">{{output}}</textarea>
+    <div class="split right">
+      <div class="centered">
+        <h1 id='pubTitle'>Publishers</h1>
+        <h3 id='directionsPub'>Choose your topic, and then publish the information!</h3>
+        <!-- <form method="POST">
+          <textarea name="pubInfo" rows="10" cols="50"></textarea>
+          <select name="subSelect">
+            <option value="Saiyans">Saiyans</option>
+            <option value="Namekians">Namekians</option>
+            <option value="Earthling">Earthlings</option>
+            <option value="Majin">Majin</option>
+            <option value="the Ginyu Force">Ginyu Force</option>
+            <option value="the Z-Fighters">Z Fighters</option>
+          </select>
+          <div>
+            <button id="pubButton" type=submit align="center">Publish</button>
+          </div>
+        </form> -->
+      </div>
     </div>
-
-    <div style="clear: both;"></div>
-
   </div>
+
+
+
+
+
+
+  <div id="bottom">
+    <div id="notifBox">
+      <textarea name="notifications" id='notifications' rows="20" cols="70">{{output}}</textarea>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
 
 </body>
 

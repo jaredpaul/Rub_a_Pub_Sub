@@ -3,10 +3,9 @@ import docker
 import os
 app = Flask(__name__, static_url_path='')
 
-broker = {"saiyans": "",
-            "namekians": "",
-            "earthlings": "",
-            "villians": ""}
+map = {'info': []}
+
+
 
 @app.route('/js/<path:path>')
 def send_js(path):
@@ -29,16 +28,22 @@ def result():
 
 @app.route('/', methods=['GET', 'POST'])
 def getUserInput():
-    # Get user input from front end
-    # text = request.form['box']
-    # dispInput(text)
-    if (request.form.get('saiyan') == 'saiyan'):
-        print("saiyan is selected")
-    if (request.form.get('namekian') == 'namekian'):
-        print("namekian is selected")
-    return render_template("pubsub.html")
+    for key in request.form:
+        print(key)
+        if key == "subName":
+            str = ""
+            text = request.form.get("subSelect")
+            tempp = map['info']
+            tempp.append(text)
+            map['info'] = tempp
+            for prev in tempp:
+                str += prev + '\n'
+            return render_template("pubsub.html", output=str)
+
+        # if key == "":
+
+    return render_template("pubsub.html", output=str)
 
 
 if __name__ == '__main__':
    app.run(debug = True, host="0.0.0.0")
-
