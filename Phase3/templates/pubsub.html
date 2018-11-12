@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Phase 2 Input</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+
+  <div id="top">
+
+    <div class="split left">
+      <div class="centered">
+        <h1 id='subTitle'>Subscribers</h1>
+        <h3 id='directionsSub'>Enter your username, and subscribe to any topic!</h3>
+        <form method="POST">
+          <input type="text" id="Stopic" name="subName" placeholder="Enter your username!">
+          <select name="subSelect">
+            <option value="Saiyans">Saiyans</option>
+            <option value="Namekians">Namekians</option>
+            <option value="Earthlings">Earthlings</option>
+            <option value="the Majin race">Majin</option>
+            <option value="the Ginyu Force">Ginyu Force</option>
+            <option value="the Z-Fighters">Z Fighters</option>
+          </select>
+          <div>
+            <button id="subButton" type=submit align="center">Subscribe</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+
+
+    <div class="split right">
+      <div class="centered">
+        <div id="pubSide">
+          <h1 id='pubTitle'>Publishers</h1>
+          <h3 id='directionsPub'>Choose your topic, and then publish the information!</h3>
+          <form method="POST">
+            <div id="pubElements">
+              <textarea name="pubInfo" rows="10" cols="50"></textarea>
+              <select name="pubSelect">
+                <option value="Saiyans">Saiyans</option>
+                <option value="Namekians">Namekians</option>
+                <option value="Earthlings">Earthlings</option>
+                <option value="the Majin race">Majin</option>
+                <option value="the Ginyu Force">Ginyu Force</option>
+                <option value="the Z-Fighters">Z Fighters</option>
+              </select>
+
+            </div>
+            <div>
+              <button id="pubButton" type=submit align="center">Publish</button>
+            </div>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+  <div id="bottom">
+    <div id="notifBox">
+      <textarea name="notifications" id='notifications' rows="20" cols="70">{{output}}</textarea>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+</body>
+
+
+
+</html>
