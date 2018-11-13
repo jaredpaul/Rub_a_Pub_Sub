@@ -41,8 +41,8 @@ def getUserInput():
     for key in request.form:
         print(key)
         if key == "subName":
-            already = "\n"
-            str = "\n"
+            already = ""
+            str = ""
             topic = request.form.get("subSelect")
             usrName = request.form.get("subName")
             if usrName in subs:
