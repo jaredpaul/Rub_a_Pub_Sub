@@ -1,7 +1,17 @@
 from flask import Flask, render_template, request, send_from_directory
 import docker
 import os
+import redis
+
 app = Flask(__name__, static_url_path='')
+
+r = redis.Redis(
+    host='hostname',
+    port=port,
+    password='password')
+
+conn = redis.Redis('localhost')
+
 
 map = {'info': []}
 
@@ -14,6 +24,12 @@ pubs = {"Saiyans": False,
         "the Ginyu Force": False,
         "the Z-Fighters": False
         }
+
+conn.hmset("mapDict", map)
+
+conn.hmset("subsDict", subs)
+
+conn.hmset("pubsDict", pubs)
 
 
 
@@ -41,35 +57,42 @@ def getUserInput():
     for key in request.form:
         print(key)
         if key == "subName":
-            already = "\n"
-            str = "\n"
+            already = ""
+            str = ""
             topic = request.form.get("subSelect")
             usrName = request.form.get("subName")
-            if usrName in subs:
-                t = subs[usrName]
+            a = conn.hgetall("subsDict")
+            if usrName in a:
+                t = a[usrName]
                 if topic not in t:
                     t.append(topic)
-                    subs[usrName] = t
+                    a[usrName] = t
                 else:
-                    s = "Sorry! Cannot subscribe to the same thing twice!\n"
-                    tempp = map['info']
+                    s = "Sorry! Cannot subscribe to the same thing twice!"
+                    b = conn.hgetall("mapDict")
+                    tempp = b['info']
                     tempp.append(s)
-                    map['info'] = tempp
+                    b = tempp
                     for prev in tempp:
                         str += prev + '\n'
+                    conn.hmset("mapDict", b)
                     return render_template("pubsub.html", output=str)
             else:
-                print(pubs)
-                for j in pubs:
-                    if pubs[j]:
-                        already += usrName + " has received information that has already been published regarding " + topic + "\n"
-                subs[usrName] = [topic]
+                c = conn.hgetall("pubsDict")
+                for j in c:
+                    if c[j]:
+                        already += usrName + " has received information that has already been published regarding " + topic + "!"
+                a[usrName] = [topic]
 
-            notifyText = usrName + " has subscribed to information regarding " + topic + "!\n"
+            notifyText = usrName + " has subscribed to information regarding " + topic + "!"
             notifyText += "\n" + already
-            tempp = map['info']
+            b = conn.hgetall("mapDict")
+            tempp = b['info']
             tempp.append(notifyText)
-            map['info'] = tempp
+            b['info'] = tempp
+            conn.hmset("mapDict", b)
+            conn.hmset("pubsDict", c)
+            conn.hmset("subsDict", a)
             for prev in tempp:
                 str += prev + '\n'
             return render_template("pubsub.html", output=str)
@@ -78,20 +101,26 @@ def getUserInput():
             str = ""
             topic = request.form.get("pubSelect")
             wasSub = ""
-            pubs[topic] = True
-            for u in subs:
-                t = subs[u]
+            c = conn.hgetall("pubsDict")
+            c[topic] = True
+            a = conn.hgetall("subsDict")
+            for u in a:
+                t = a[u]
                 for info in t:
                     if topic == info:
-                        wasSub += u + " has received new information regarding " + topic + "!\n"
-            tempp = map['info']
+                        wasSub += u + " has received new information regarding " + topic + "!"
+            b = conn.hgetall("mapDict")
+            tempp = b['info']
             if wasSub != "":
                 tempp.append(wasSub)
-                map['info'] = tempp
+                b['info'] = tempp
             for prev in tempp:
                 str += prev + '\n'
 
-            print(pubs)
+            conn.hmset("subsDict", a)
+            conn.hmset("mapDict", b)
+            conn.hmset("pubsDict", c)
+
 
     return render_template("pubsub.html", output=str)
 
