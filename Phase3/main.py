@@ -9,6 +9,7 @@ map = {'info': []}
 subs = {}
 
 r = redis.Redis(host='localhost', port=6379)
+r.set('info', [])
 
 pubs = {"Saiyans": False,
         "Namekians": False,
@@ -58,9 +59,11 @@ def getUserInput():
                     r.set(usrName, t)
                 else:
                     s = "Sorry! Cannot subscribe to the same thing twice!\n"
-                    tempp = map['info']
+                    #tempp = map['info']
+                    tempp = str(r.get('info'))
                     tempp.append(s)
-                    map['info'] = tempp
+                    #map['info'] = tempp
+                    r.set('info', tempp)
                     for prev in tempp:
                         str += prev + '\n'
                     return render_template("pubsub.html", output=str)
@@ -70,13 +73,19 @@ def getUserInput():
                     if pubs[j]:
                         already += usrName + " has received information that has already been published regarding " + topic + "\n"
                 #subs[usrName] = [topic]
+                print(usrName)
+                print(topic)
                 r.set(usrName, topic)
+                print(r.get(usrName))
+                print(str(r.get(usrName)))
 
             notifyText = usrName + " has subscribed to information regarding " + topic + "!\n"
             notifyText += "\n" + already
-            tempp = map['info']
+            #tempp = map['info']
+            tempp = str(r.get('info'))
             tempp.append(notifyText)
-            map['info'] = tempp
+            #map['info'] = tempp
+            r.set('info', tempp)
             for prev in tempp:
                 str += prev + '\n'
             return render_template("pubsub.html", output=str)
@@ -89,14 +98,16 @@ def getUserInput():
             #for u in subs:
             for u in r:
                 #t = subs[u]
-                t = r.get(u)
+                t = str(r.get(u))
                 for info in t:
                     if topic == info:
                         wasSub += u + " has received new information regarding " + topic + "!\n"
-            tempp = map['info']
+            #tempp = map['info']
+            tempp = str(r.get('info'))
             if wasSub != "":
                 tempp.append(wasSub)
-                map['info'] = tempp
+                #map['info'] = tempp
+                r.set('info', tempp)
             for prev in tempp:
                 str += prev + '\n'
 
