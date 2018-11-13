@@ -7,7 +7,6 @@ app = Flask(__name__, static_url_path='')
 
 r = redis.Redis(
     host='hostname',
-    port=port,
     password='password')
 
 conn = redis.Redis('localhost')
