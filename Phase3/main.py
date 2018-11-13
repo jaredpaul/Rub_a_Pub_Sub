@@ -51,11 +51,11 @@ def getUserInput():
             #if usrName in subs:
             if usrName in r:
                 #t = subs[usrName]
-                t = r[usrName]
+                t = r.get(usrName)
                 if topic not in t:
                     t.append(topic)
                     #subs[usrName] = t
-                    r[usrName] = t
+                    r.set(usrName, t)
                 else:
                     s = "Sorry! Cannot subscribe to the same thing twice!\n"
                     tempp = map['info']
@@ -70,7 +70,7 @@ def getUserInput():
                     if pubs[j]:
                         already += usrName + " has received information that has already been published regarding " + topic + "\n"
                 #subs[usrName] = [topic]
-                r[usrName] = [topic]
+                r.set(usrName, topic)
 
             notifyText = usrName + " has subscribed to information regarding " + topic + "!\n"
             notifyText += "\n" + already
@@ -89,7 +89,7 @@ def getUserInput():
             #for u in subs:
             for u in r:
                 #t = subs[u]
-                t = r[u]
+                t = r.get(u)
                 for info in t:
                     if topic == info:
                         wasSub += u + " has received new information regarding " + topic + "!\n"
