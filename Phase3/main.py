@@ -1,11 +1,14 @@
 from flask import Flask, render_template, request, send_from_directory
 import docker
 import os
+import redis
 app = Flask(__name__, static_url_path='')
 
 map = {'info': []}
 
 subs = {}
+
+r = redis.Redis(host='localhost', port=6379)
 
 pubs = {"Saiyans": False,
         "Namekians": False,
@@ -45,11 +48,14 @@ def getUserInput():
             str = "\n"
             topic = request.form.get("subSelect")
             usrName = request.form.get("subName")
-            if usrName in subs:
-                t = subs[usrName]
+            #if usrName in subs:
+            if usrName in r:
+                #t = subs[usrName]
+                t = r[usrName]
                 if topic not in t:
                     t.append(topic)
-                    subs[usrName] = t
+                    #subs[usrName] = t
+                    r[usrName] = t
                 else:
                     s = "Sorry! Cannot subscribe to the same thing twice!\n"
                     tempp = map['info']
@@ -63,7 +69,8 @@ def getUserInput():
                 for j in pubs:
                     if pubs[j]:
                         already += usrName + " has received information that has already been published regarding " + topic + "\n"
-                subs[usrName] = [topic]
+                #subs[usrName] = [topic]
+                r[usrName] = [topic]
 
             notifyText = usrName + " has subscribed to information regarding " + topic + "!\n"
             notifyText += "\n" + already
@@ -79,8 +86,10 @@ def getUserInput():
             topic = request.form.get("pubSelect")
             wasSub = ""
             pubs[topic] = True
-            for u in subs:
-                t = subs[u]
+            #for u in subs:
+            for u in r:
+                #t = subs[u]
+                t = r[u]
                 for info in t:
                     if topic == info:
                         wasSub += u + " has received new information regarding " + topic + "!\n"
